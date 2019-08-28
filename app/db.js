@@ -203,7 +203,7 @@ module.exports.start = function (settings) {
         });
       }
     });
-    console.log("INTENTANDO CONECTAR A DB: " + user + " pwd: " + password + " desde: " + process.env.HOST)
+    console.log("INTENTANDO CONECTAR A DB: " + process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root') + " pwd: " + process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234') + " desde: " + process.env.HOST)
     logger.info('add the shutdown callback for close the connection pool...');
     require('app/shutdown').addListener(function (name) {
       if (mPool && _.isFunction(mPool.end)) {
