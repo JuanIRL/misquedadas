@@ -31,6 +31,8 @@ const _ = require('lodash');
 
 const configUtil      = require('../config-util');
 var def = require('../../misquedadas-2.json');
+def.HereMapsAppID = process.env.HERE_APPCODE || DEF.HereMapsAppCode;
+def.HereMapsAppCode = process.env.HERE_APPCODE || DEF.HereMapsAppCode
 
 //
 // Router: /quedada

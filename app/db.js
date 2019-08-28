@@ -1,7 +1,7 @@
 /*
  * misquedadas2 - https://github.com/DiegoMartindeAndres/misquedadas.git
  *
- * Copyright (c) 2018 
+ * Copyright (c) 2018
  */
 
 /**
@@ -63,12 +63,12 @@ Conn.prototype.release = function () {
 
 /**
  * Executes a sql statement within a transaction bracket.
- * 
+ *
  * **Example**
- * 
+ *
  * ```js
  * const db = require('app/db');
- * 
+ *
  * db.getConnection()
  *   .then(function (conn) {
  *      return conn.beginTransaction()
@@ -99,7 +99,7 @@ Conn.prototype.release = function () {
  *        });
  *   });
  * ```
- * 
+ *
  * @return {Q.promise}
  */
 Conn.prototype.beginTransaction = function () {
@@ -123,11 +123,11 @@ Conn.prototype.beginTransaction = function () {
 
 /**
  * Send a commit to the database.
- * 
+ *
  * In case of success, the given parameter "result" is routing to the resolve.
- * 
+ *
  * Example see at Conn#beginTransaction()
- * 
+ *
  * @param {*} result the query result from the former sql statement.
  * @return {Q.promise} resolve with the result
  */
@@ -153,7 +153,7 @@ Conn.prototype.commit = function (result) {
 
 /**
  * Send a rollback to the database.
- * 
+ *
  * Example see at Conn#beginTransaction()
  *
  * @param {*} reason the query error from the former sql statement.
@@ -187,8 +187,8 @@ module.exports.start = function (settings) {
       host:     configUtil.getSetting(settings, 'db.host', 'localhost'),
       port:     configUtil.getSetting(settings, 'db.port', 3306),
       user:     configUtil.getSetting(settings, 'db.user', 'root'),
-      password: configUtil.getSetting(settings, 'db.password', 'test1234'),
-      database: configUtil.getSetting(settings, 'db.database', ''),
+      password: process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234'),
+      database: process.env.DB_NAME || configUtil.getSetting(settings, 'db.database', ''),
       connectionLimit: configUtil.getSetting(settings, 'db.connectionLimit', 10),
       queryFormat: function (query, values) {
         if (!values) {
@@ -216,12 +216,12 @@ module.exports.start = function (settings) {
 
 /**
  * Returns an open connection.
- * 
+ *
  * **Example**
- * 
+ *
  * ```js
  * const db = require('app/db');
- * 
+ *
  * db.getConnection()
  *   .then(function (conn) {
  *     const values = {
