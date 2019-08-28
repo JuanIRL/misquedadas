@@ -180,9 +180,14 @@ var mPool = null;
  *
  * @param {object} settings the settings instance.
  */
+
+const user = process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root');
+const pass = process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234');
+const desde = process.env.HOST;
 module.exports.start = function (settings) {
   if (!mPool) {
     logger.info('create connection pool.');
+    user =
     mPool = mysql.createPool({
       host:     configUtil.getSetting(settings, 'db.host', 'localhost'),
       port:     configUtil.getSetting(settings, 'db.port', 3306),
@@ -203,7 +208,6 @@ module.exports.start = function (settings) {
         });
       }
     });
-    console.log("INTENTANDO CONECTAR A DB: " + process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root') + " pwd: " + process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234') + " desde: " + process.env.HOST)
     logger.info('add the shutdown callback for close the connection pool...');
     require('app/shutdown').addListener(function (name) {
       if (mPool && _.isFunction(mPool.end)) {
@@ -240,6 +244,7 @@ module.exports.start = function (settings) {
  * @return {promise} the promise resolve callback has the parameter from type {@link Conn}
  */
 module.exports.getConnection = function () {
+  console.log("INTENTANDO CONECTAR A DB: " + user + " pwd: " + pass + " desde: " desde);
   if (!mPool) {
     return Q.reject({
       code: 'CONN_NOT_INITIALIZED',
