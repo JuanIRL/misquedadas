@@ -244,7 +244,7 @@ module.exports.start = function (settings) {
  * @return {promise} the promise resolve callback has the parameter from type {@link Conn}
  */
 module.exports.getConnection = function () {
-  console.log("INTENTANDO CONECTAR A DB: " + user + " pwd: " + pass + " desde: " desde);
+  console.log("INTENTANDO CONECTAR A DB: " + user + " pwd: " + pass + " desde: " + desde);
   if (!mPool) {
     return Q.reject({
       code: 'CONN_NOT_INITIALIZED',
