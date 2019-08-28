@@ -186,7 +186,7 @@ module.exports.start = function (settings) {
     mPool = mysql.createPool({
       host:     configUtil.getSetting(settings, 'db.host', 'localhost'),
       port:     configUtil.getSetting(settings, 'db.port', 3306),
-      user:     configUtil.getSetting(settings, 'db.user', 'root'),
+      user:     process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root'),
       password: process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234'),
       database: process.env.DB_NAME || configUtil.getSetting(settings, 'db.database', ''),
       connectionLimit: configUtil.getSetting(settings, 'db.connectionLimit', 10),
