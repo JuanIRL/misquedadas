@@ -184,14 +184,14 @@ module.exports.start = function (settings) {
 
   // get the port and host
   const port = process.env.PORT || configUtil.getSetting(settings, 'server.port', 0);
-  const host = configUtil.getSetting(settings, 'server.host', DEFAULT_HOST);
+  const host = '0.0.0.0' || configUtil.getSetting(settings, 'server.host', DEFAULT_HOST);
 
   const done = Q.defer();
 
   if (port > 0) {
     // starts the listening of the express application...
     app.listen(port, host, function () {
-      logger.info('Server is listen http://', host, ':', port);
+      logger.info('Server is listening on http://', host, ':', port);
       done.resolve(true);
     });
   } else {
