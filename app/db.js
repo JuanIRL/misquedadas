@@ -185,13 +185,10 @@ var mPool = null;
  var pass;
  var desde;
 module.exports.start = function (settings) {
-  user = process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root');
-  pass = process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234');
-  desde = process.env.HOST;
   if (!mPool) {
     logger.info('create connection pool.');
     mPool = mysql.createPool({
-      host:     configUtil.getSetting(settings, 'db.host', 'localhost'),
+      host:     process.env.DB_HOST || configUtil.getSetting(settings, 'db.host', 'localhost'),
       port:     configUtil.getSetting(settings, 'db.port', 3306),
       user:     process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root'),
       password: process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234'),
@@ -246,7 +243,7 @@ module.exports.start = function (settings) {
  * @return {promise} the promise resolve callback has the parameter from type {@link Conn}
  */
 module.exports.getConnection = function () {
-  console.log("INTENTANDO CONECTAR A DB: " + user + " pwd: " + pass + " desde: " + desde);
+  console.log("INTENTANDO CONECTAR A DB: " + user + " pwd: " + pass);
   if (!mPool) {
     return Q.reject({
       code: 'CONN_NOT_INITIALIZED',

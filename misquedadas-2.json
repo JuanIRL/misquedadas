@@ -5,7 +5,7 @@
   },
   "db": {
     "port": 3306,
-    "host": "liebanajr.com",
+    "host": "o61qijqeuqnj9chh.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "user": "root",
     "password": "",
     "database": "misquedadas",
