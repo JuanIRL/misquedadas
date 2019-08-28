@@ -181,12 +181,13 @@ var mPool = null;
  * @param {object} settings the settings instance.
  */
 
-
+ var user;
+ var pass;
+ var desde;
 module.exports.start = function (settings) {
-  var user = process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root');
-  var pass = process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234');
-  var desde = process.env.HOST;
-  
+  user = process.env.DB_USER || configUtil.getSetting(settings, 'db.user', 'root');
+  pass = process.env.DB_PASSWORD || configUtil.getSetting(settings, 'db.password', 'test1234');
+  desde = process.env.HOST;
   if (!mPool) {
     logger.info('create connection pool.');
     mPool = mysql.createPool({
