@@ -183,7 +183,7 @@ module.exports.start = function (settings) {
   // Starting...
 
   // get the port and host
-  const port = configUtil.getSetting(settings, 'server.port', 0);
+  const port = process.env.PORT || configUtil.getSetting(settings, 'server.port', 0);
   const host = configUtil.getSetting(settings, 'server.host', DEFAULT_HOST);
 
   const done = Q.defer();
