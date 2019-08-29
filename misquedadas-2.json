@@ -5,10 +5,10 @@
   },
   "db": {
     "port": 3306,
-    "host": "o61qijqeuqnj9chh.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host": "localhost",
     "user": "root",
     "password": "",
-    "database": "misquedadas",
+    "database": "misquedadas2",
     "connectionLimit": 10
   },
   "logger": {
