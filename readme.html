@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+
+<h1 id="instalaciónypruebasdelportalmisquedadas">Instalación y pruebas del portal &#8220;misquedadas&#8221;</h1>
+
+<h2 id="arranqueyaccesoalservidorpersonalvirtual">Arranque y acceso al Servidor Personal Virtual</h2>
+
+<ul>
+<li>Arrancar el Servidor Personal desde Moodle de FTEL</li>
+<li>Moodle de la UPM -&gt; Asignatura FTEL -&gt; Tema 6 - Proyecto del curso -&gt; Servidor Personal en la nube DIT: arranque, estado y acceso</li>
+<li>Descargar en la máquina local la clave privada de acceso al servidor según se indica en las instrucciones de la página anterior</li>
+<li>Acceder, por ssh, al Servidor Personal siguiendo las instrucciones de la misma página</li>
+</ul>
+
+<h2 id="instalacióndelaaplicación">Instalación de la aplicación</h2>
+
+<p>En la consola de comandos del Servidor Personal ejecutar:</p>
+
+<pre><code class="sh">$ cd ~
+$ git clone https://github.com/DiegoMartindeAndres/misquedadas.git
+$ cd ~/misquedadas
+$ npm install
+</code></pre>
+
+<h2 id="modificarlasclavesdeaccesoalabbddyalmapadegooglemaps">Modificar las claves de acceso a la BBDD y al mapa de Google Maps</h2>
+
+<p>Nos acabamos de descargar el código de un repositorio público. No es una buena práctica dejar en los repositorios públicos claves ya cualquiera podría ver las claves y acceder al sistema. Por lo tanto tendremos que añadir a mano dichas claves; las claves se almacenan en un fichero llamado “misquedadas-2.json”. Deberemos editarlo, por ejemplo con Nano (nano misquedadas-2.json)</p>
+
+<p>Los valores concretos están publicados en el Moodle de la asignatura en el artículo &#8220;Instalación y pruebas del portal &#8220;misquedadas&#8221;&#8221;</p>
+
+<h2 id="cargadecontenidos">Carga de contenidos</h2>
+
+<ul>
+<li>Rellenar la BBDD misquedadas, de forma similar a como se hizo en la práctica de BBDD, con los datos que se quieran presentar en el portal</li>
+</ul>
+
+<h2 id="arranquedelservicio">Arranque del servicio</h2>
+
+<p>En la consola de comandos del servidor personal ejecutar:</p>
+
+<pre><code class="sh">$ cd ~/misquedadas
+$ npm start
+</code></pre>
+
+<h2 id="pararelservicio">Parar el servicio</h2>
+
+<ul>
+<li>Pulsando la combinación de teclas <code>Ctrl+C</code></li>
+</ul>
+
+<h2 id="comprobacióndelservicio">Comprobación del Servicio</h2>
+
+<ul>
+<li>NAVEGAR por la aplicación: navegador -&gt; http://<code>la ip de mi servidor personal</code>:8080</li>
+</ul>
+
+<h2 id="rearranquedelservidorydelservicio">Rearranque del servidor y del servicio</h2>
+
+<p>Para rearrancar el servicio habrá que concatenar las acciones de parar el servicio y arrancar el servicio. Es decir:</p>
+
+<pre><code class="sh">`Ctrl+C`
+$ npm start
+</code></pre>
+
+<h2 id="license">License</h2>
+
+<p>Diego Martín de Andrés 2018</p>
+
+</body>
+</html>
+

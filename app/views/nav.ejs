@@ -19,7 +19,9 @@
   </div>
   <div class="user">
     <a href="/">
-      <img class="rounded-circle fotoUsuario" src="/img/<%= user %>.jpg" alt="<%= user %>" title="<%= user %>">
+      <div id="navUser" class="rounded-circle fotoUsuario" style="background-image: url('/img/<%= user %>.jpg')" >
+        <!--<img id="navUser" src="/img/<%= user %>.jpg" alt="<%= user %>" title="<%= user %>">-->
+      </div>
       <div class="nombreUsuario">
         <%= user %>
       </div>

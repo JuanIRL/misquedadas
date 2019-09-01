@@ -1,11 +1,11 @@
 /*
- * misquedadas2 - https://github.com/DiegoMartindeAndres/misquedadas.git
+ * misquedadas2 - https://github.com/JuanIRL/misquedadas.git
  *
  * Copyright (c) 2018
  */
 
 /**
- * @module mq2/service/remove-asiste
+ * @module mq2/service/add-asiste
  *
  * @requires lodash
  * @requires module:mq2/args
@@ -26,8 +26,8 @@ const logger = require('app/logger').getLogger('mq2.service');
  * Statement for all databases.
  * @type {string}
  */
-const SQL_REMOVE_ASISTE = [
-  'DELETE FROM asiste WHERE nombre LIKE {nombre} and que LIKE {que}'
+const SQL_ADD_USUARIO = [
+  'INSERT INTO usuario VALUES ({nombre},{clave},{edad},{imagen})'
 ].join('\n');
 
 /**
@@ -39,18 +39,20 @@ module.exports.execute = function (parametros) {
   return db.getConnection()
     .then(function (conn) {
       const nombre = _preparePattern(parametros.nombre);
-      const que = _preparePattern(parametros.que);
-
-
-      var sqlStatement = SQL_REMOVE_ASISTE;
+      const clave = _preparePattern(parametros.clave);
+      const edad = parametros.edad//_preparePattern(parametros.edad);
+      const imagen = _preparePattern(parametros.imagen);
+      var sqlStatement = SQL_ADD_USUARIO;
       var params = {};
       params.nombre = nombre;
-      params.que = que;
+      params.clave = clave;
+      params.edad = edad;
+      params.imagen = imagen;
 
       return conn.query(sqlStatement, params)
         .then(function (databases) {
           if (args.isVerbose()) {
-            logger.debug('Your databases: ', JSON.stringify(databases));
+            logger.debug('Your usuario: ', JSON.stringify(databases));
           }
           var result = [];
           // _.forEach(databases, function (db) {

@@ -20,6 +20,8 @@ const executor      = require('app/executor');
 const showUsuarios = require('app/service/get-usuarios');
 const showUsuario = require('app/service/get-usuario');
 const showImagenUsuario = require('app/service/get-imagenUsuario');
+const addUsuario = require('app/service/add-usuario');
+const removeUsuario = require('app/service/remove-usuario');
 
 //
 // Router: /quedada
@@ -131,7 +133,22 @@ router.get('/:NOMBRE/imagen', function (req, res) {
   });
 });
 
+router.post('/nuevo', function (req, res) {
+    var params = {};
+    params.nombre = req.body.NOMBRE;
+    params.clave = req.body.CLAVE;
+    params.edad = req.body.EDAD;
+    params.imagen = req.body.IMAGEN;
+    Promise.all([addUsuario.execute(params)]);
+    res.render('login',{message:"", error:""});
+});
 
+router.get('/delete/:NOMBRE', function (req, res) {
+    var params = {};
+    params.nombre = req.params.NOMBRE;
+    Promise.all([removeUsuario.execute(params)]);
+    res.render('login',{message:"", error:""});
+});
 
 
 //

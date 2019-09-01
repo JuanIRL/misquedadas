@@ -51,7 +51,7 @@ const logger = require('app/logger').getLogger('mq2.service');
              logger.debug('Your databases: ', JSON.stringify(databases));
            }
 
-           
+
            var result = [];
            _.forEach(databases, function (db) {
              const name = _.values(db)[0];

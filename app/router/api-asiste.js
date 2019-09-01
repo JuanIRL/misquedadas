@@ -221,7 +221,6 @@ router.delete('/', function (req, res) {
     var params = {};
     params.que = req.body.que;
     params.nombre = req.body.nombre;
-
       sender(removeAsiste.execute(params),'RemoveAsiste');
   });
 });

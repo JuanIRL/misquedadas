@@ -1,0 +1,125 @@
+<% include head %>
+
+<!-- show any messages that come back with authentication
+<% if (message.length > 0) { %>
+  <%= message %>
+  <% } %>
+
+  <%- error %>
+-->
+  <body id="LoginForm" class="d-flex align-items-center">
+    <div class="container login-container">
+      <img src="/img/logo.png" alt="">
+      <h2>mis quedadas</h2>
+      <div class="login-form">
+          <div class="panel">
+            <p>Introduce tus datos para crear un nuevo usuario</p>
+          </div>
+          <form name="signinform" id="Signin" action="/usuario/nuevo" method="post" enctype='multipart/form-data'>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="NOMBRE" id="nombre" placeholder="Usuario" required>
+              <span id="icono" class="col-1 fas fa-times fa-2x text-danger" data-toggle="tooltip" data-placement="right" title="Usuario ya existente"></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="CLAVE" placeholder="Contraseña" required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" name="EDAD" placeholder="Edad">
+            </div>
+            <div class="form-group">
+              <input type="file" class="form-control inputfile" id="file" name="IMAGEN" placeholder="Imagen de perfil" required>
+              <label for="file" class="form-control inputfile-label" class="danger"><i class="fas fa-upload"></i> Choose a file...</label>
+            </div>
+            <button type="submit" id="botonEnviar" class="btn btn-primary btn-block button-login" disabled="true" >Enviar</button>
+          </form>
+      </div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip({
+        container:'body',
+        trigger: 'hover',
+        animation: true
+      });
+    })
+  </script>
+
+  <script>
+
+  var usuarios = <%- JSON.stringify(usuarios) %>;
+  var texto = document.getElementById('nombre');
+
+
+  function validateForm() {
+    //console.log("entro a validar nuevo usuario");
+    var x = document.forms["signinform"]["nombre"].value;
+    if (usuarios.includes(x) || x == "" || x.toLowerCase() == "nuevo" ) {
+      document.getElementById("icono").classList.remove('text-success');
+      document.getElementById("nombre").classList.remove('is-valid');
+      document.getElementById("icono").classList.remove('fa-check');
+
+      document.getElementById("icono").classList.add('text-danger');
+      document.getElementById("nombre").classList.add('is-invalid');
+      document.getElementById("icono").classList.add('fa-times');
+
+      document.getElementById('botonEnviar').disabled = true;
+      return false;
+    } else {
+      document.getElementById("icono").classList.remove('text-danger');
+      document.getElementById("nombre").classList.remove('is-invalid');
+      document.getElementById("icono").classList.remove('fa-times');
+
+      document.getElementById("icono").classList.add('text-success');
+      document.getElementById("nombre").classList.add('is-valid');
+      document.getElementById("icono").classList.add('fa-check');
+
+      document.getElementById('botonEnviar').disabled = false;
+      return true;
+    }
+    return false;
+  }
+
+  texto.addEventListener("keyup", function (event) {
+  validateForm();
+  }, false);
+
+  </script>
+
+  <script type="text/javascript">
+    var inputs = document.querySelectorAll( '.inputfile' );
+    Array.prototype.forEach.call( inputs, function( input ){
+    	var label	 = input.nextElementSibling,
+    	labelVal = label.innerHTML;
+
+    	input.addEventListener( 'change', function( e ){
+    		var fileName = '';
+    			fileName = e.target.value.split( "\\" ).pop();
+
+    		if( fileName )
+    			label.innerHTML = "<i class='fas fa-check-circle'></i> " + fileName;
+    		else
+    			label.innerHTML = labelVal;
+    	});
+    });
+  </script>
+
+  <!--<script src="/js/json-formdata.js"></script>
+
+  <script>
+  /* Common use case, similar to usual FormData object */
+  var form = document.querySelector('form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/usuario/nuevo');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(new JSONFormData(form).formData));
+    xhr.addEventListener('loadend', function() {
+      // Callback...
+      window.location.href = '/login';
+    }, false);
+  }, false);
+</script>-->

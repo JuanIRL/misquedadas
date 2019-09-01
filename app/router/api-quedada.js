@@ -59,6 +59,7 @@ const router = express.Router({
  *       ]
  *     }
  */
+
 router.get('/', function (req, res) {
   executor.execute(req, res, function (sender) {
     sender(showQuedadas.execute(), 'quedadas');

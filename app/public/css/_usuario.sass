@@ -1,0 +1,68 @@
+body#usuario
+  padding: 0
+  .usuario-container
+    background-color: rgba(250,250,250,1)
+    padding: 0 15 50px 15
+    .usuario-acciones
+      margin-top: 50px
+      text-align: center
+      .boton-logout
+        display: block
+        width: 100px
+        height: 100px
+        border-radius: 100%
+        background-color: white
+        display: flex
+        align-items: center
+        justify-content: center
+        font-size: 3em
+        box-shadow: $shadow-nav
+        margin: auto
+        margin-bottom: 30px
+    .usuario-info-container
+      max-width: 640px
+      margin: auto
+      margin-top: -90px
+      h2
+        text-align: center
+      .lista-quedadas-container
+        width: 100%
+        .lista-quedadas
+          border-radius: $radio
+          box-shadow: $shadow-nav
+        h2
+          text-align: center
+        #botonNuevaQuedada
+          width: 100%
+          box-shadow: $shadow-nav
+          margin-top: 20px
+          background-color: $color-4
+          color: white
+          border: none
+          @media (max-width: $mobile-width)
+            border-radius: $radio
+    .usuario-image-container
+      height: 50vh
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 70%, rgba(250,250,250,1) 100%), url("/img/login-background.jpg")
+      background-repeat: no-repeat
+      background-position: center
+      background-size: cover
+      display: flex
+      align-items: center
+      justify-content: center
+      .img
+        height: 20vh
+        width: 20vh
+        overflow: hidden
+        position: relative
+        box-shadow: $shadow-nav
+        background-repeat: no-repeat
+        background-position: center
+        background-size: cover
+        img
+          position: absolute
+          top: 50%
+          left: 50%
+          transform: translate(-50%, -50%)
+  footer
+    margin-top: 0

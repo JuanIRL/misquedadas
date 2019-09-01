@@ -13,7 +13,7 @@
       <h2>mis quedadas</h2>
       <div class="login-form">
           <div class="panel">
-            <p>Accede a Mis quedadas v2 introduciendo tu usuario y contraseña</p>
+            <p>Accede a Mis quedadas introduciendo tu usuario y contraseña</p>
           </div>
           <form id="Login" action="/login" method="post" enctype='application/json'>
 
@@ -24,6 +24,8 @@
               <input type="password" class="form-control" name="clave" placeholder="Contraseña">
             </div>
             <button type="submit" class="btn btn-primary btn-block button-login">Login</button>
+            <br>
+            <a href="/usuario/nuevo">Crear nuevo usuario</a>
           </form>
       </div>
     </div>
@@ -42,7 +44,7 @@
     xhr.send(JSON.stringify(new JSONFormData(form).formData));
     xhr.addEventListener('loadend', function() {
       // Callback...
-      window.location.href = '/quedada';
+      window.location.href = '/usuario';
     }, false);
   }, false);
 </script>

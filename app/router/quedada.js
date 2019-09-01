@@ -20,6 +20,8 @@ const executor      = require('app/executor');
 const showQuedadas = require('app/service/get-quedadas');
 const showQuedada = require('app/service/get-quedada');
 const showAsiste = require('app/service/get-asiste');
+const addAsiste = require('app/service/add-asiste');
+const removeAsiste = require('app/service/remove-asiste');
 const showAsistencia = require('app/service/get-asistencia');
 const showCoordenada = require('app/service/get-coordenadasQuedada.js');
 const removeQuedada = require('app/service/remove-quedada');
@@ -31,8 +33,8 @@ const _ = require('lodash');
 
 const configUtil      = require('../config-util');
 var def = require('../../misquedadas-2.json');
-def.HereMapsAppID = process.env.HERE_APPCODE || DEF.HereMapsAppCode;
-def.HereMapsAppCode = process.env.HERE_APPCODE || DEF.HereMapsAppCode
+//def.HereMapsAppID = process.env.HERE_APPCODE || DEF.HereMapsAppCode;
+//def.HereMapsAppCode = process.env.HERE_APPCODE || DEF.HereMapsAppCode
 
 //
 // Router: /quedada
@@ -82,7 +84,7 @@ module.exports = function (app,passport) {
 
         if (values[0].quedadas[0]){
           var primeraQue = values[0].quedadas[0];
-          console.log("/////////////////////////////////////////////"+primeraQue);
+          //console.log("/////////////////////////////////////////////"+primeraQue);
           res.redirect(301,'/quedada/'+primeraQue);
         } else {
           res.render('error',{message:"Parece que no tienes ninguna quedada en la BBDD.", error:""});
@@ -150,10 +152,10 @@ module.exports = function (app,passport) {
             res.render('error',{message:err.messagge, error:err});
           })
           .then(values => {
-            var quedadas = values[0].quedadas;
             var quedadasAsisto = values[4];
             var datosQuedada = values[1];
             var asistentes = values[2];
+            var quedadas = values[0].quedadas;
             var arrayCoordenada = _.split(values[3][0].coordenadas, ',');
             var lat = _.trim(arrayCoordenada[0]);
             var lng = _.trim(arrayCoordenada[1]);
@@ -161,7 +163,7 @@ module.exports = function (app,passport) {
             var asiste = asistentes.includes(usuario);
             //console.log('Datos quedada: ' + datosQuedada[0].que + ' ' + datosQuedada[0].dia + ' ' + datosQuedada[0].restante);
             //console.log("Quedadas a las que asiste " + usuario + ": " +quedadasAsisto);
-            res.render('quedadas',{quedadas:quedadas, quedadasAsisto: quedadasAsisto, quedada:datosQuedada[0], asistentes:asistentes, lat:lat, lng:lng , user:usuario, asiste:asiste, GoogleMapsAPIkey:def.GoogleMapsAPIkey, HereMapsAppID: def.HereMapsAppID, HereMapsAppCode: def. HereMapsAppCode, UseOpenStreetMaps: def.UseOpenStreetMaps});
+            res.render('quedadas',{quedadas:quedadas, quedadasAsisto: quedadasAsisto, quedada:datosQuedada[0], asistentes:asistentes, lat:lat, lng:lng , user:usuario, asiste:asiste, GoogleMapsAPIkey:def.GoogleMapsAPIkey, HereMapsAppID: def.HereMapsAppID, HereMapsAppCode: def.HereMapsAppCode, UseOpenStreetMaps: def.UseOpenStreetMaps});
           });
         });
 
@@ -177,6 +179,7 @@ module.exports = function (app,passport) {
         *     curl -i http://localhost:18080/quedada/que=cumpleaños&dia=28-02-2018&hora=20:35&direccion=escuela
         *
         */
+
         router.post('/', isLoggedIn, function (req, res) {
 
           var usuario = req.session.passport.user;
@@ -186,6 +189,7 @@ module.exports = function (app,passport) {
           params.direccion = req.body.direccion;
           params.dia = req.body.dia;
           params.hora = req.body.hora;
+          params.nombre = usuario;
 
           Promise.all([showQuedadas.execute(usuario)])
           .catch(
@@ -204,7 +208,7 @@ module.exports = function (app,passport) {
                 // console.log("el sitio: "+params.direccion+" NO está dentro de la lista: "+sitios);
                 // console.log("lo añado.");
 
-                    Promise.all([addQuedada.execute(params)])
+                    Promise.all([addQuedada.execute(params), addAsiste.execute(params)])
                     .catch(
                       function(err) {
                         //console.log(err); // some coding error in handling happened
@@ -240,16 +244,17 @@ module.exports = function (app,passport) {
 
                 var params = {};
                 params.que = req.params.QUE;
+                params.nombre = "%"
 
                 // Ejecutamos todas las promesas de búsquedas en la BBDD...
-                Promise.all([removeQuedada.execute(params)])
+                Promise.all([removeQuedada.execute(params), removeAsiste.execute(params)])
                 .catch(
                   function(err) {
                     //console.log(err.message); // some coding error in handling happened
                     res.render('error',{message:err.messagge, error:err});
                   })
                   .then(values => {
-                    var quedadas = values[0];
+                    //var quedadas = values[0];
                     //console.log(quedadas); // some coding error in handling happened
                     res.redirect(301,'/quedada/');
                   });

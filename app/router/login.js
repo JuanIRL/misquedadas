@@ -48,7 +48,7 @@ module.exports = function (app,passport) {
   });
 
   router.post('/', passport.authenticate('local-login', {
-      successRedirect : '/quedada', // redirect to the secure profile section
+      successRedirect : '/usuario', // redirect to the secure profile section
       failureRedirect : '/login', // redirect back to the signup page if there is an error
       failureFlash : true // allow flash messages
   }));

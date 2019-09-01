@@ -4,11 +4,15 @@
   width: 100%
   .asistente-item
     margin-left: 15
-    img
-      height: 10vw
+    .img
+      height: 14vw
+      width: 10vw
       box-shadow: $shadow-nav
       border-radius: $radio
       margin-bottom: 10px
+      background-position: center
+      background-repeat: no-repeat
+      background-size: cover
     .nombreUsuario
       text-align: center
   h3
@@ -25,17 +29,19 @@
     overflow-x: scroll
     //top: calc(100vw + 80px)
     top: calc(100vw + 80px)
+    margin-top: -10vw
     //transform: translateY(-50%)
-    background: linear-gradient(to bottom, #f1faff 0%, #ffffff 100%)
+    //background: linear-gradient(to bottom, #f1faff 0%, #ffffff 100%)
     .asistente-item
       border-radius: 100%
-      border-top: 3px solid $color-1
-      border-left: 3px solid $color-1
+      //border-top: 3px solid $color-1
+      //border-left: 3px solid $color-1
+      box-shadow: $shadow-nav
       overflow: hidden
       margin-left: 15
-      //box-shadow: $shadow-nav
-      img
+      .img
         height: 10vw
+        width: 10vw
         margin-bottom: 0
       .nombreUsuario
         display: none

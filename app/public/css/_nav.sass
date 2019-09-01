@@ -27,6 +27,8 @@ nav.flex
     align-content: center
     height: 100%
     padding: 20px
+    .otras-quedadas-toggle
+      display: none
     a
       display: flex
       flex-direction: row
@@ -52,30 +54,43 @@ nav.flex
   .user
     width: 60%
     text-align: center
-    .fotoUsuario
-      height: 60%
-    .nombreUsuario
-      font-weight: normal
-      font-size: 20
-      display: inline-block
-      margin-left: 10px
-      color: $color-texto-base
-  @media(min-width: $mobile-width-md)
-    height: $nav-height-desktop
-    position: absolute
-    .user
-      width: 400px
+    a
+      display: flex
+      align-items: center
+      justify-content: center
+      .fotoUsuario
+        display: inline-block
+        height: 50px
+        width: 50px
+        overflow: hidden
+        position: relative
+        background-repeat: no-repeat
+        background-size: cover
+        background-position: center
+        img
+          position: absolute
+          left: 50%
+          top: 50%
+          transform: translate(-50%,-50%)
+      .nombreUsuario
+        height: 100%
+        font-weight: normal
+        font-size: 20
+        display: inline-block
+        margin-left: 10px
+        color: $color-texto-base
   @media (min-width: $mobile-width)
     .nav-icon
       a
         .nav-tag, i
           font-size: 20
     .user
-      .fotoUsuario
-        height: 75%
-      .nombreUsuario
-        display: block
-        margin: 0
+      a
+        .fotoUsuario
+          height: 50px
+          width: 50px
+        .nombreUsuario
+          display: block
     &.scrolled
       height: $nav-height-scrolled
       .nav-icon
@@ -86,6 +101,26 @@ nav.flex
         .nombreUsuario
           display: inline-block
           margin-left: 10px
+  @media(min-width: $mobile-width-md)
+    height: $nav-height-desktop
+    position: absolute
+    .nav-icon
+      .otras-quedadas-toggle
+        display: inline-block
+        div
+          display: inline
+    .user
+      position: relative
+      width: 400px
+      height: 100%
+      margin-top: 50px
+      a
+        display: inline
+        .fotoUsuario
+          height: 130px
+          width: 130px
+        .nombreUsuario
+          margin: 0
   @media(min-width: 992px)
     .user
       width: 635px

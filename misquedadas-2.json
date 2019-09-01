@@ -5,10 +5,10 @@
   },
   "db": {
     "port": 3306,
-    "host": "localhost",
-    "user": "root",
-    "password": "",
-    "database": "misquedadas2",
+    "host": "o61qijqeuqnj9chh.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "user": "v271vwyja4knnxuc",
+    "password": "im1h1r8skan1g4mc",
+    "database": "b92fnezl2es4cvig",
     "connectionLimit": 10
   },
   "logger": {
@@ -26,7 +26,7 @@
     "appender": "console"
   },
   "GoogleMapsAPIkey" : "",
-  "HereMapsAppID" : "",
-  "HereMapsAppCode" : "",
+  "HereMapsAppID" : "ZufL8LUCsn4530iRov3l",
+  "HereMapsAppCode" : "PD0XFT1gq8aU1O0s9JmSlA",
   "UseOpenStreetMaps": false
 }

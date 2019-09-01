@@ -5,6 +5,7 @@
 
     <div class="col-md-7 map-container">
       <div id="map"></div>
+      <div class="map-overlay"></div>
     </div>
     <div class="col-md-5 mr-auto info-container d-flex flex-column">
       <h2><%= quedada.que %></h2>
@@ -55,7 +56,8 @@
         <% for(var i=0; i<asistentes.length; i++) { %>
           <div class="asistente-item" data-toggle="tooltip" data-placement="right" title='<%= asistentes[i] %>'>
             <a>
-              <img  src="/img/<%= asistentes[i] %>.jpg" alt="<%= asistentes[i] %>" title="<%= asistentes[i] %>"><br>
+              <!--<img  src="/img/<%= asistentes[i] %>.jpg" alt="<%= asistentes[i] %>" title="<%= asistentes[i] %>"><br>-->
+              <div class="img" style="background-image: url('/img/<%= asistentes[i] %>.jpg')"></div>
               <div class="nombreUsuario">
                 <%= asistentes[i] %>
               </div>

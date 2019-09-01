@@ -35,6 +35,7 @@ var session      = require('express-session');
 const info            = require('app/info');
 const configUtil      = require('app/config-util');
 const logger          = require('app/logger').getLogger('mq2');
+const fileUpload = require('express-fileupload');
 
 const middleware      = require('app/middleware');
 
@@ -44,9 +45,8 @@ const routerAPIUsuario  = require('app/router/api-usuario');
 const routerAPIAsiste   = require('app/router/api-asiste');
 const routerAPISitio    = require('app/router/api-sitio');
 
-//quitar
-const routerAPIPruebaUsuario = require('app/router/usuario');
 
+const routerUsuario = './router/usuario';
 const routerQuedada     = './router/quedada.js';
 const routerSitio     = './router/sitio.js';
 const routerLogin     = './router/login.js';
@@ -83,6 +83,8 @@ module.exports.start = function (settings) {
 
   app.use(middleware.measureTime());
 
+  app.use(fileUpload());
+
   // Necesario para hacer funcionar el passport
   require('./configPassport')(passport);
 
@@ -113,7 +115,7 @@ module.exports.start = function (settings) {
   //Estas rutas del API REST no llevan autentificación
   //(probar a ver que pasa si se puede hacer)
   app.get('/', function(req, res) {
-      res.redirect('/quedada');
+      res.redirect('/usuario');
   });
 
   app.use('/api/quedada', routerAPIQuedada);
@@ -121,13 +123,10 @@ module.exports.start = function (settings) {
   app.use('/api/asiste', routerAPIAsiste);
   app.use('/api/sitio', routerAPISitio);
 
-  //------
-  //prueba
-  //------
-  app.use('/usuario', routerAPIPruebaUsuario);
 
   //Estas rutas tienes que estar logeado
   require(routerLogin)(app,passport);
+  require(routerUsuario)(app,passport);
   require(routerQuedada)(app,passport);
   require(routerSitio)(app,passport);
 

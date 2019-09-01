@@ -82,6 +82,10 @@ nav.flex .nav-icon {
   padding: 20px;
 }
 
+nav.flex .nav-icon .otras-quedadas-toggle {
+  display: none;
+}
+
 nav.flex .nav-icon a {
   display: flex;
   flex-direction: row;
@@ -115,11 +119,32 @@ nav.flex .user {
   text-align: center;
 }
 
-nav.flex .user .fotoUsuario {
-  height: 60%;
+nav.flex .user a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-nav.flex .user .nombreUsuario {
+nav.flex .user a .fotoUsuario {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+nav.flex .user a .fotoUsuario img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+nav.flex .user a .nombreUsuario {
+  height: 100%;
   font-weight: normal;
   font-size: 20;
   display: inline-block;
@@ -127,26 +152,16 @@ nav.flex .user .nombreUsuario {
   color: #2a3d54;
 }
 
-@media (min-width: 768px) {
-  nav.flex {
-    height: 200px;
-    position: absolute;
-  }
-  nav.flex .user {
-    width: 400px;
-  }
-}
-
 @media (min-width: 576px) {
   nav.flex .nav-icon a .nav-tag, nav.flex .nav-icon a i {
     font-size: 20;
   }
-  nav.flex .user .fotoUsuario {
-    height: 75%;
+  nav.flex .user a .fotoUsuario {
+    height: 50px;
+    width: 50px;
   }
-  nav.flex .user .nombreUsuario {
+  nav.flex .user a .nombreUsuario {
     display: block;
-    margin: 0;
   }
   nav.flex.scrolled {
     height: 60px;
@@ -157,6 +172,35 @@ nav.flex .user .nombreUsuario {
   nav.flex.scrolled .user .nombreUsuario {
     display: inline-block;
     margin-left: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  nav.flex {
+    height: 200px;
+    position: absolute;
+  }
+  nav.flex .nav-icon .otras-quedadas-toggle {
+    display: inline-block;
+  }
+  nav.flex .nav-icon .otras-quedadas-toggle div {
+    display: inline;
+  }
+  nav.flex .user {
+    position: relative;
+    width: 400px;
+    height: 100%;
+    margin-top: 50px;
+  }
+  nav.flex .user a {
+    display: inline;
+  }
+  nav.flex .user a .fotoUsuario {
+    height: 130px;
+    width: 130px;
+  }
+  nav.flex .user a .nombreUsuario {
+    margin: 0;
   }
 }
 
@@ -191,7 +235,21 @@ nav.flex .user .nombreUsuario {
  * element that contains the map. */
 .map-container {
   padding: 0;
-  margin-bottom: 17vw;
+  margin-bottom: 7vw;
+}
+
+.map-container .map-overlay {
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+  position: absolute;
+  bottom: 0;
+}
+
+@media (min-width: 576px) {
+  .map-container .map-overlay {
+    display: none;
+  }
 }
 
 .map-container #map {
@@ -373,11 +431,15 @@ nav.flex .user .nombreUsuario {
   margin-left: 15;
 }
 
-.lista-asistentes-container .asistente-item img {
-  height: 10vw;
+.lista-asistentes-container .asistente-item .img {
+  height: 14vw;
+  width: 10vw;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.3);
   border-radius: 0.3rem;
   margin-bottom: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .lista-asistentes-container .asistente-item .nombreUsuario {
@@ -396,17 +458,17 @@ nav.flex .user .nombreUsuario {
     width: 100vw;
     overflow-x: scroll;
     top: calc(100vw + 80px);
-    background: linear-gradient(to bottom, #f1faff 0%, #ffffff 100%);
+    margin-top: -10vw;
   }
   .lista-asistentes-container .asistente-item {
     border-radius: 100%;
-    border-top: 3px solid #01acff;
-    border-left: 3px solid #01acff;
+    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     margin-left: 15;
   }
-  .lista-asistentes-container .asistente-item img {
+  .lista-asistentes-container .asistente-item .img {
     height: 10vw;
+    width: 10vw;
     margin-bottom: 0;
   }
   .lista-asistentes-container .asistente-item .nombreUsuario {
@@ -424,7 +486,7 @@ nav.flex .user .nombreUsuario {
 }
 
 .lista-quedadas-container {
-  z-index: 4;
+  z-index: 3;
   width: 100vw;
   padding: 0;
   padding-top: 60;
@@ -445,6 +507,7 @@ nav.flex .user .nombreUsuario {
 
 .lista-quedadas-container .lista-quedadas a {
   font-size: 1.3rem;
+  z-index: 5;
 }
 
 .lista-quedadas-container .lista-quedadas a form {
@@ -474,6 +537,16 @@ nav.flex .user .nombreUsuario {
 
 .lista-quedadas-container .lista-quedadas a.active .check-asiste.fa-check-circle {
   color: white;
+}
+
+.lista-quedadas-container .lista-quedadas-overlay {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #e6e6e6 100%);
+  width: 100%;
+  height: 20px;
+  margin-top: -20px;
+  z-index: 6;
+  border-radius: 0 0 0.3rem 0.3rem;
+  position: absolute;
 }
 
 @media (min-width: 768px) {
@@ -507,22 +580,18 @@ nav.flex .user .nombreUsuario {
   padding-top: 60px;
 }
 
-.lista-quedadas-container.desplegable.displayed {
-  height: 100vh;
-}
-
 @media (min-width: 768px) {
   .lista-quedadas-container.desplegable {
     top: 200px;
     padding: 0;
-    max-height: 60vh;
+    height: 45vh;
     opacity: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   .lista-quedadas-container.desplegable .lista-quedadas {
-    max-height: auto;
+    max-height: 30vh;
   }
   .lista-quedadas-container.desplegable #botonNuevaQuedada {
     margin: 0;
@@ -538,6 +607,7 @@ nav.flex .user .nombreUsuario {
 
 .info-container h2 {
   margin-bottom: 15;
+  padding: 0;
 }
 
 .info-container .data-container {
@@ -615,8 +685,34 @@ body#LoginForm {
   line-height: 50px;
 }
 
+.login-container .login-form .inputfile {
+  margin: 0;
+  height: 0.1px;
+  opacity: 0;
+  padding: 0;
+}
+
+.login-container .login-form .inputfile-label {
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.login-container .login-form .inputfile-label i {
+  margin-right: 5px;
+}
+
 .login-container .login-form .form-group {
   margin-bottom: 10px;
+  position: relative;
+}
+
+.login-container .login-form .form-group #icono {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .login-container .login-form .button-login {
@@ -690,6 +786,106 @@ footer {
 footer .copyright {
   opacity: .5;
   line-height: 1.7;
+}
+
+body#usuario {
+  padding: 0;
+}
+
+body#usuario .usuario-container {
+  background-color: #fafafa;
+  padding: 0 15 50px 15;
+}
+
+body#usuario .usuario-container .usuario-acciones {
+  margin-top: 50px;
+  text-align: center;
+}
+
+body#usuario .usuario-container .usuario-acciones .boton-logout {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.3);
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+body#usuario .usuario-container .usuario-info-container {
+  max-width: 640px;
+  margin: auto;
+  margin-top: -90px;
+}
+
+body#usuario .usuario-container .usuario-info-container h2 {
+  text-align: center;
+}
+
+body#usuario .usuario-container .usuario-info-container .lista-quedadas-container {
+  width: 100%;
+}
+
+body#usuario .usuario-container .usuario-info-container .lista-quedadas-container .lista-quedadas {
+  border-radius: 0.3rem;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+body#usuario .usuario-container .usuario-info-container .lista-quedadas-container h2 {
+  text-align: center;
+}
+
+body#usuario .usuario-container .usuario-info-container .lista-quedadas-container #botonNuevaQuedada {
+  width: 100%;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  background-color: #2a3d54;
+  color: white;
+  border: none;
+}
+
+@media (max-width: 576px) {
+  body#usuario .usuario-container .usuario-info-container .lista-quedadas-container #botonNuevaQuedada {
+    border-radius: 0.3rem;
+  }
+}
+
+body#usuario .usuario-container .usuario-image-container {
+  height: 50vh;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 70%, #fafafa 100%), url("/img/login-background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body#usuario .usuario-container .usuario-image-container .img {
+  height: 20vh;
+  width: 20vh;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.3);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+body#usuario .usuario-container .usuario-image-container .img img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body#usuario footer {
+  margin-top: 0;
 }
 
 @media (min-width: 576px) {

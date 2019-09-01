@@ -22,17 +22,18 @@
   "dependencies": {
     "app-module-path": "2.2.0",
     "bluesky-logger": "^0.7.1",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "connect-flash": "~0.1.1",
-    "cookie-parser": "~1.4.3",
-    "ejs": "^2.6.1",
-    "express": ">=4.16.4",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.5",
     "express-session": "~1.15.6",
     "lodash": ">=4.17.14",
     "method-override": "^2.3.10",
     "minimist": "1.2.0",
     "moment": "^2.24.0",
-    "mysql": "^2.16.0",
+    "mysql": "^2.17.1",
     "passport": "~0.4.0",
     "passport-local": "~1.0.0",
     "path": "^0.12.7",
@@ -42,6 +43,6 @@
     "apidoc": "0.17.5",
     "docdash": "0.4.0",
     "jsdoc": "3.4.3",
-    "mocha": ">=5.2.0"
+    "mocha": "^6.2.0"
   }
 }
